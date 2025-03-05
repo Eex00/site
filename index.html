@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle, #222, black);
+            background: radial-gradient(circle, #111, #000);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -22,40 +22,40 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background: linear-gradient(45deg, cyan, magenta);
+            background: white;
             border-radius: 50%;
-            box-shadow: 0 0 15px cyan, 0 0 30px magenta;
-            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            transition: transform 0.05s ease;
         }
 
         /* Effet de traînée */
         .trace {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: linear-gradient(45deg, cyan, magenta);
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-            opacity: 0.8;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 1;
             transform: scale(1.5);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
 
         /* Particules */
         .particule {
             position: absolute;
-            width: 5px;
-            height: 5px;
-            background-color: white;
+            width: 6px;
+            height: 6px;
+            background: white;
             border-radius: 50%;
-            opacity: 0.7;
-            box-shadow: 0 0 8px white;
-            animation: disparition 0.8s linear forwards;
+            opacity: 0.8;
+            box-shadow: 0 0 10px white;
+            animation: explosion 0.6s linear forwards;
         }
 
-        @keyframes disparition {
+        @keyframes explosion {
             to {
-                transform: translateY(-20px);
+                transform: translateY(-30px) scale(0);
                 opacity: 0;
             }
         }
@@ -66,16 +66,11 @@
 
     <script>
         const serpent = document.getElementById('serpent');
-        const largeurEcran = window.innerWidth;
-        const hauteurEcran = window.innerHeight;
-
-        let positionX = Math.random() * largeurEcran;
-        let positionY = Math.random() * hauteurEcran;
-        let vitesseX = 0;
-        let vitesseY = 0;
+        let positionX = window.innerWidth / 2;
+        let positionY = window.innerHeight / 2;
         let cibleX = positionX;
         let cibleY = positionY;
-        let vitesse = 5;
+        let vitesse = 7;
 
         function creerTrace(x, y) {
             const trace = document.createElement('div');
@@ -86,19 +81,19 @@
             setTimeout(() => {
                 trace.style.opacity = '0';
                 trace.style.transform = 'scale(0)';
-            }, 100);
-            setTimeout(() => trace.remove(), 600);
+            }, 50);
+            setTimeout(() => trace.remove(), 400);
         }
 
         function creerParticules(x, y) {
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 5; i++) {
                 const particule = document.createElement('div');
                 particule.classList.add('particule');
                 document.body.appendChild(particule);
                 particule.style.left = x + 'px';
                 particule.style.top = y + 'px';
-                particule.style.transform = `translate(${(Math.random() - 0.5) * 40}px, ${(Math.random() - 0.5) * 40}px)`;
-                setTimeout(() => particule.remove(), 800);
+                particule.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px)`;
+                setTimeout(() => particule.remove(), 600);
             }
         }
 
@@ -108,10 +103,8 @@
             let distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance > 1) {
-                vitesseX = (dx / distance) * vitesse;
-                vitesseY = (dy / distance) * vitesse;
-                positionX += vitesseX;
-                positionY += vitesseY;
+                positionX += (dx / distance) * vitesse;
+                positionY += (dy / distance) * vitesse;
             }
 
             serpent.style.left = positionX + 'px';
@@ -123,6 +116,7 @@
         document.addEventListener('click', (event) => {
             cibleX = event.clientX;
             cibleY = event.clientY;
+            creerParticules(cibleX, cibleY);
         });
 
         setInterval(miseAJour, 1000 / 60);
