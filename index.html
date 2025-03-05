@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serpent aléatoire</title>
+    <title>Serpent animé</title>
     <style>
-        /* Style de la page */
+        /* Style de base de la page */
         body {
             margin: 0;
             padding: 0;
@@ -16,15 +15,32 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Le serpent */
+        /* Style du serpent */
         .serpent {
             position: absolute;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .segment {
             width: 20px;
             height: 20px;
             background-color: white;
             border-radius: 50%;
+            margin: 2px;
+        }
+
+        /* Animation du serpent */
+        @keyframes serpentMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+            }
         }
     </style>
 </head>
@@ -32,40 +48,57 @@
     <div id="serpent" class="serpent"></div>
 
     <script>
-        // Récupérer l'élément du serpent
         const serpent = document.getElementById('serpent');
+        const segmentCount = 10; // Nombre de segments du serpent
+        const segments = [];
+        let segmentsPositions = [];
         
         // Dimensions de l'écran
         const largeurEcran = window.innerWidth;
         const hauteurEcran = window.innerHeight;
 
-        // Position initiale du serpent
-        let positionX = Math.random() * largeurEcran;
-        let positionY = Math.random() * hauteurEcran;
-
-        // Vitesse et direction de déplacement du serpent
-        let vitesseX = (Math.random() - 0.5) * 10; // Mouvement aléatoire horizontal
-        let vitesseY = (Math.random() - 0.5) * 10; // Mouvement aléatoire vertical
-
-        // Mettre à jour la position du serpent
-        function miseAJour() {
-            positionX += vitesseX;
-            positionY += vitesseY;
-
-            // Vérifier les bords pour que le serpent reste à l'écran
-            if (positionX <= 0 || positionX >= largeurEcran - 20) {
-                vitesseX = -vitesseX; // Changer la direction du mouvement horizontal
-            }
-            if (positionY <= 0 || positionY >= hauteurEcran - 20) {
-                vitesseY = -vitesseY; // Changer la direction du mouvement vertical
-            }
-
-            // Appliquer les nouvelles positions au serpent
-            serpent.style.left = positionX + 'px';
-            serpent.style.top = positionY + 'px';
+        // Générer les segments du serpent
+        for (let i = 0; i < segmentCount; i++) {
+            const segment = document.createElement('div');
+            segment.classList.add('segment');
+            serpent.appendChild(segment);
+            segments.push(segment);
+            segmentsPositions.push({ x: Math.random() * largeurEcran, y: Math.random() * hauteurEcran });
         }
 
-        // Exécuter la mise à jour à chaque frame
+        // Définir la vitesse et direction initiale
+        let vitesseX = (Math.random() - 0.5) * 4;
+        let vitesseY = (Math.random() - 0.5) * 4;
+
+        // Fonction pour mettre à jour la position du serpent
+        function miseAJour() {
+            // Déplacer chaque segment en suivant la tête du serpent
+            for (let i = segmentCount - 1; i > 0; i--) {
+                segmentsPositions[i] = { ...segmentsPositions[i - 1] };
+            }
+
+            // Déplacer la tête du serpent
+            segmentsPositions[0].x += vitesseX;
+            segmentsPositions[0].y += vitesseY;
+
+            // Vérifier les bords pour que le serpent reste à l'écran
+            if (segmentsPositions[0].x <= 0 || segmentsPositions[0].x >= largeurEcran - 20) {
+                vitesseX = -vitesseX;
+            }
+            if (segmentsPositions[0].y <= 0 || segmentsPositions[0].y >= hauteurEcran - 20) {
+                vitesseY = -vitesseY;
+            }
+
+            // Appliquer les nouvelles positions à chaque segment
+            for (let i = 0; i < segmentCount; i++) {
+                const segment = segments[i];
+                const pos = segmentsPositions[i];
+                segment.style.left = pos.x + 'px';
+                segment.style.top = pos.y + 'px';
+            }
+        }
+
+        // Appeler miseAJour à chaque frame
         setInterval(miseAJour, 1000 / 60); // 60 FPS
     </script>
 </body>
