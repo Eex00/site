@@ -1,1 +1,72 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serpent aléatoire</title>
+    <style>
+        /* Style de la page */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Le serpent */
+        .serpent {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="serpent" class="serpent"></div>
+
+    <script>
+        // Récupérer l'élément du serpent
+        const serpent = document.getElementById('serpent');
+        
+        // Dimensions de l'écran
+        const largeurEcran = window.innerWidth;
+        const hauteurEcran = window.innerHeight;
+
+        // Position initiale du serpent
+        let positionX = Math.random() * largeurEcran;
+        let positionY = Math.random() * hauteurEcran;
+
+        // Vitesse et direction de déplacement du serpent
+        let vitesseX = (Math.random() - 0.5) * 10; // Mouvement aléatoire horizontal
+        let vitesseY = (Math.random() - 0.5) * 10; // Mouvement aléatoire vertical
+
+        // Mettre à jour la position du serpent
+        function miseAJour() {
+            positionX += vitesseX;
+            positionY += vitesseY;
+
+            // Vérifier les bords pour que le serpent reste à l'écran
+            if (positionX <= 0 || positionX >= largeurEcran - 20) {
+                vitesseX = -vitesseX; // Changer la direction du mouvement horizontal
+            }
+            if (positionY <= 0 || positionY >= hauteurEcran - 20) {
+                vitesseY = -vitesseY; // Changer la direction du mouvement vertical
+            }
+
+            // Appliquer les nouvelles positions au serpent
+            serpent.style.left = positionX + 'px';
+            serpent.style.top = positionY + 'px';
+        }
+
+        // Exécuter la mise à jour à chaque frame
+        setInterval(miseAJour, 1000 / 60); // 60 FPS
+    </script>
+</body>
+</html>
