@@ -63,7 +63,7 @@
         const segmentCount = 10; // Nombre de segments du serpent
         const segments = [];
         let segmentsPositions = [];
-        
+
         // Dimensions de l'écran
         const largeurEcran = window.innerWidth;
         const hauteurEcran = window.innerHeight;
@@ -88,7 +88,7 @@
                 segmentsPositions[i] = { ...segmentsPositions[i - 1] };
             }
 
-            // Déplacer la tête du serpent
+            // Déplacer la tête du serpent (le premier segment)
             segmentsPositions[0].x += vitesseX;
             segmentsPositions[0].y += vitesseY;
 
