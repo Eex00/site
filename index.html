@@ -71,8 +71,11 @@
 
         let positionX = Math.random() * largeurEcran;
         let positionY = Math.random() * hauteurEcran;
-        let vitesseX = (Math.random() - 0.5) * 10;
-        let vitesseY = (Math.random() - 0.5) * 10;
+        let vitesseX = 0;
+        let vitesseY = 0;
+        let cibleX = positionX;
+        let cibleY = positionY;
+        let vitesse = 5;
 
         function creerTrace(x, y) {
             const trace = document.createElement('div');
@@ -100,16 +103,15 @@
         }
 
         function miseAJour() {
-            positionX += vitesseX;
-            positionY += vitesseY;
+            let dx = cibleX - positionX;
+            let dy = cibleY - positionY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (positionX <= 0 || positionX >= largeurEcran - 20) {
-                vitesseX = -vitesseX;
-                creerParticules(positionX, positionY);
-            }
-            if (positionY <= 0 || positionY >= hauteurEcran - 20) {
-                vitesseY = -vitesseY;
-                creerParticules(positionX, positionY);
+            if (distance > 1) {
+                vitesseX = (dx / distance) * vitesse;
+                vitesseY = (dy / distance) * vitesse;
+                positionX += vitesseX;
+                positionY += vitesseY;
             }
 
             serpent.style.left = positionX + 'px';
@@ -117,6 +119,11 @@
             serpent.style.transform = `scale(${1 + Math.random() * 0.2})`;
             creerTrace(positionX, positionY);
         }
+
+        document.addEventListener('click', (event) => {
+            cibleX = event.clientX;
+            cibleY = event.clientY;
+        });
 
         setInterval(miseAJour, 1000 / 60);
     </script>
