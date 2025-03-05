@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9mm</title>
+    <title>9mm - Serpent Animé</title>
     <style>
         /* Style de la page */
         body {
@@ -24,6 +24,18 @@
             height: 20px;
             background-color: white;
             border-radius: 50%;
+            box-shadow: 0 0 10px white;
+        }
+
+        /* Effet de traînée */
+        .trace {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            transition: opacity 0.5s ease-out;
         }
     </style>
 </head>
@@ -31,41 +43,42 @@
     <div id="serpent" class="serpent"></div>
 
     <script>
-        // Récupérer l'élément du serpent
         const serpent = document.getElementById('serpent');
-        
-        // Dimensions de l'écran
         const largeurEcran = window.innerWidth;
         const hauteurEcran = window.innerHeight;
 
-        // Position initiale du serpent
         let positionX = Math.random() * largeurEcran;
         let positionY = Math.random() * hauteurEcran;
+        let vitesseX = (Math.random() - 0.5) * 10;
+        let vitesseY = (Math.random() - 0.5) * 10;
 
-        // Vitesse et direction de déplacement du serpent
-        let vitesseX = (Math.random() - 0.5) * 10; // Mouvement aléatoire horizontal
-        let vitesseY = (Math.random() - 0.5) * 10; // Mouvement aléatoire vertical
+        function creerTrace(x, y) {
+            const trace = document.createElement('div');
+            trace.classList.add('trace');
+            document.body.appendChild(trace);
+            trace.style.left = x + 'px';
+            trace.style.top = y + 'px';
+            setTimeout(() => trace.style.opacity = '0', 100);
+            setTimeout(() => trace.remove(), 500);
+        }
 
-        // Mettre à jour la position du serpent
         function miseAJour() {
             positionX += vitesseX;
             positionY += vitesseY;
 
-            // Vérifier les bords pour que le serpent reste à l'écran
             if (positionX <= 0 || positionX >= largeurEcran - 20) {
-                vitesseX = -vitesseX; // Changer la direction du mouvement horizontal
+                vitesseX = -vitesseX;
             }
             if (positionY <= 0 || positionY >= hauteurEcran - 20) {
-                vitesseY = -vitesseY; // Changer la direction du mouvement vertical
+                vitesseY = -vitesseY;
             }
 
-            // Appliquer les nouvelles positions au serpent
             serpent.style.left = positionX + 'px';
             serpent.style.top = positionY + 'px';
+            creerTrace(positionX, positionY);
         }
 
-        // Exécuter la mise à jour à chaque frame
-        setInterval(miseAJour, 1000 / 60); // 60 FPS
+        setInterval(miseAJour, 1000 / 60);
     </script>
 </body>
 </html>
