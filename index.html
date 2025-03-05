@@ -26,6 +26,16 @@
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
             transition: transform 0.05s ease;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+            }
         }
 
         /* Effet de traînée */
@@ -39,6 +49,14 @@
             opacity: 1;
             transform: scale(1.5);
             transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            animation: fadeOut 0.6s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
         }
 
         /* Particules */
@@ -77,15 +95,11 @@
             document.body.appendChild(trace);
             trace.style.left = x + 'px';
             trace.style.top = y + 'px';
-            setTimeout(() => {
-                trace.style.opacity = '0';
-                trace.style.transform = 'scale(0)';
-            }, 50);
-            setTimeout(() => trace.remove(), 400);
+            setTimeout(() => trace.remove(), 600);
         }
 
         function creerParticules(x, y) {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 7; i++) {
                 const particule = document.createElement('div');
                 particule.classList.add('particule');
                 document.body.appendChild(particule);
@@ -94,6 +108,11 @@
                 particule.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px)`;
                 setTimeout(() => particule.remove(), 600);
             }
+        }
+
+        function changerDirectionAleatoire() {
+            vitesseX = (Math.random() - 0.5) * 10;
+            vitesseY = (Math.random() - 0.5) * 10;
         }
 
         function miseAJour() {
@@ -116,6 +135,7 @@
         }
 
         setInterval(miseAJour, 1000 / 60);
+        setInterval(changerDirectionAleatoire, 2000);
     </script>
 </body>
 </html>
