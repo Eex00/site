@@ -16,20 +16,6 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            font-family: Arial, sans-serif;
-        }
-
-        /* Style de la citation */
-        .citation {
-            position: absolute;
-            top: 20px; /* Positionne le texte 20px du haut de la page */
-            left: 50%;
-            transform: translateX(-50%); /* Centrer horizontalement */
-            color: white; /* Couleur du texte */
-            font-size: 24px; /* Taille de la police */
-            font-style: italic; /* Style de la police en italique */
-            text-align: center; /* Aligne le texte au centre */
-            z-index: 10; /* S'assurer que le texte soit au-dessus du serpent */
         }
 
         /* Style du serpent */
@@ -37,7 +23,6 @@
             position: absolute;
             display: flex;
             flex-direction: row;
-            z-index: 5; /* S'assurer que le serpent soit en dessous de la citation */
         }
 
         .segment {
@@ -47,15 +32,19 @@
             border-radius: 50%;
             margin: 2px;
         }
+
+        /* Animation du serpent */
+        @keyframes serpentMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Citation -->
-    <div class="citation">
-        "People always leave. Don’t get too attached" -x
-    </div>
-
-    <!-- Serpent -->
     <div id="serpent" class="serpent"></div>
 
     <script>
@@ -63,7 +52,7 @@
         const segmentCount = 10; // Nombre de segments du serpent
         const segments = [];
         let segmentsPositions = [];
-
+        
         // Dimensions de l'écran
         const largeurEcran = window.innerWidth;
         const hauteurEcran = window.innerHeight;
@@ -88,7 +77,7 @@
                 segmentsPositions[i] = { ...segmentsPositions[i - 1] };
             }
 
-            // Déplacer la tête du serpent (le premier segment)
+            // Déplacer la tête du serpent
             segmentsPositions[0].x += vitesseX;
             segmentsPositions[0].y += vitesseY;
 
@@ -109,21 +98,8 @@
             }
         }
 
-        // Initialisation du serpent (afficher les segments au bon endroit dès le départ)
-        function initialisationSerpent() {
-            for (let i = 0; i < segmentCount; i++) {
-                const segment = segments[i];
-                const pos = segmentsPositions[i];
-                segment.style.left = pos.x + 'px';
-                segment.style.top = pos.y + 'px';
-            }
-        }
-
         // Appeler miseAJour à chaque frame
         setInterval(miseAJour, 1000 / 60); // 60 FPS
-
-        // Initialiser l'affichage du serpent dès le chargement
-        initialisationSerpent();
     </script>
 </body>
 </html>
