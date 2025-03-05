@@ -109,8 +109,21 @@
             }
         }
 
+        // Initialisation du serpent (afficher les segments au bon endroit dès le départ)
+        function initialisationSerpent() {
+            for (let i = 0; i < segmentCount; i++) {
+                const segment = segments[i];
+                const pos = segmentsPositions[i];
+                segment.style.left = pos.x + 'px';
+                segment.style.top = pos.y + 'px';
+            }
+        }
+
         // Appeler miseAJour à chaque frame
         setInterval(miseAJour, 1000 / 60); // 60 FPS
+
+        // Initialiser l'affichage du serpent dès le chargement
+        initialisationSerpent();
     </script>
 </body>
 </html>
