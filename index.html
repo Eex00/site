@@ -37,23 +37,86 @@
                 box-shadow: 0 0 30px rgba(255, 255, 255, 1);
             }
         }
+
+        /* Effet de traînée */
+        .trace {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transform: scale(1.5);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            animation: fadeOut 0.6s linear forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Particules */
+        .particule {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            box-shadow: 0 0 10px white;
+            animation: explosion 0.6s linear forwards;
+        }
+
+        @keyframes explosion {
+            to {
+                transform: translateY(-30px) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
-    <audio id="musique" src="musique.mp3" autoplay loop></audio>
     <div id="serpent" class="serpent"></div>
 
-    <script>
-        document.addEventListener('click', () => {
-            const musique = document.getElementById('musique');
-            musique.play().catch(error => console.log("Lecture auto bloquée :", error));
-        }, { once: true });
+    <!-- Musique de fond -->
+    <audio id="musique" src="musique.mp3" loop></audio>
 
+    <script>
         const serpent = document.getElementById('serpent');
         let positionX = Math.random() * window.innerWidth;
         let positionY = Math.random() * window.innerHeight;
         let vitesseX = (Math.random() - 0.5) * 10;
         let vitesseY = (Math.random() - 0.5) * 10;
+
+        function creerTrace(x, y) {
+            const trace = document.createElement('div');
+            trace.classList.add('trace');
+            document.body.appendChild(trace);
+            trace.style.left = x + 'px';
+            trace.style.top = y + 'px';
+            setTimeout(() => trace.remove(), 600);
+        }
+
+        function creerParticules(x, y) {
+            for (let i = 0; i < 7; i++) {
+                const particule = document.createElement('div');
+                particule.classList.add('particule');
+                document.body.appendChild(particule);
+                particule.style.left = x + 'px';
+                particule.style.top = y + 'px';
+                particule.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 50}px)`;
+                setTimeout(() => particule.remove(), 600);
+            }
+        }
+
+        function changerDirectionAleatoire() {
+            vitesseX = (Math.random() - 0.5) * 10;
+            vitesseY = (Math.random() - 0.5) * 10;
+        }
 
         function miseAJour() {
             positionX += vitesseX;
@@ -61,16 +124,28 @@
 
             if (positionX <= 0 || positionX >= window.innerWidth - 20) {
                 vitesseX = -vitesseX;
+                creerParticules(positionX, positionY);
             }
             if (positionY <= 0 || positionY >= window.innerHeight - 20) {
                 vitesseY = -vitesseY;
+                creerParticules(positionX, positionY);
             }
 
             serpent.style.left = positionX + 'px';
             serpent.style.top = positionY + 'px';
+            serpent.style.transform = `scale(${1 + Math.random() * 0.2})`;
+            creerTrace(positionX, positionY);
         }
 
         setInterval(miseAJour, 1000 / 60);
+        setInterval(changerDirectionAleatoire, 2000);
+
+        // Démarrer la musique après une interaction utilisateur
+        document.addEventListener('click', () => {
+            const musique = document.getElementById('musique');
+            musique.play().catch(error => console.log("Lecture auto bloquée :", error));
+        }, { once: true });
+
     </script>
 </body>
 </html>
