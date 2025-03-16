@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,6 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            flex-direction: column;
         }
 
         /* Le serpent */
@@ -39,64 +38,49 @@
             }
         }
 
-        /* Contrôle du volume */
-        .volume-control {
+        /* Effet de traînée */
+        .trace {
             position: absolute;
-            bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: white;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 1;
+            transform: scale(1.5);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            animation: fadeOut 0.6s linear forwards;
         }
 
-        .volume-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 8px;
-            height: 120px;
-            background: linear-gradient(to top, #ff4747, #ffb347);
-            border-radius: 10px;
-            outline: none;
-            cursor: pointer;
-            position: relative;
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
         }
 
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
+        /* Particules */
+        .particule {
+            position: absolute;
+            width: 6px;
+            height: 6px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-            position: relative;
+            opacity: 0.8;
+            box-shadow: 0 0 10px white;
+            animation: explosion 0.6s linear forwards;
         }
 
-        .volume-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            background: white;
-            border-radius: 50%;
-            cursor: pointer;
+        @keyframes explosion {
+            to {
+                transform: translateY(-30px) scale(0);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
     <div id="serpent" class="serpent"></div>
-
-    <!-- Musique de fond -->
-    <audio id="musique" src="musique.mp3" loop></audio>
-
-    <!-- Contrôle du volume -->
-    <div class="volume-control">
-        <label for="volume">🔊</label>
-        <input type="range" id="volume" class="volume-slider" min="0" max="1" step="0.1" value="1" orient="vertical">
-    </div>
 
     <script>
         const serpent = document.getElementById('serpent');
@@ -152,20 +136,6 @@
 
         setInterval(miseAJour, 1000 / 60);
         setInterval(changerDirectionAleatoire, 2000);
-
-        // Démarrer la musique après une interaction utilisateur
-        document.addEventListener('click', () => {
-            const musique = document.getElementById('musique');
-            musique.play().catch(error => console.log("Lecture auto bloquée :", error));
-        }, { once: true });
-
-        // Gestion du volume
-        const musique = document.getElementById('musique');
-        const volumeControl = document.getElementById('volume');
-
-        volumeControl.addEventListener('input', () => {
-            musique.volume = volumeControl.value;
-        });
     </script>
 </body>
 </html>
