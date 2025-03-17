@@ -77,13 +77,35 @@
                 opacity: 0;
             }
         }
+
+        /* Styles pour le thème blanc */
+        body.white-theme {
+            background: radial-gradient(circle, #fff, #eee);
+        }
+
+        .serpent.white-theme {
+            background: black;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .trace.white-theme {
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .particule.white-theme {
+            background: black;
+            box-shadow: 0 0 10px black;
+        }
     </style>
 </head>
 <body>
+    <button id="toggleTheme">Changer le thème</button>
     <div id="serpent" class="serpent"></div>
 
     <script>
         const serpent = document.getElementById('serpent');
+        const toggleThemeButton = document.getElementById('toggleTheme');
         let positionX = Math.random() * window.innerWidth;
         let positionY = Math.random() * window.innerHeight;
         let vitesseX = (Math.random() - 0.5) * 10;
@@ -92,6 +114,9 @@
         function creerTrace(x, y) {
             const trace = document.createElement('div');
             trace.classList.add('trace');
+            if (document.body.classList.contains('white-theme')) {
+                trace.classList.add('white-theme');
+            }
             document.body.appendChild(trace);
             trace.style.left = x + 'px';
             trace.style.top = y + 'px';
@@ -102,6 +127,9 @@
             for (let i = 0; i < 7; i++) {
                 const particule = document.createElement('div');
                 particule.classList.add('particule');
+                if (document.body.classList.contains('white-theme')) {
+                    particule.classList.add('white-theme');
+                }
                 document.body.appendChild(particule);
                 particule.style.left = x + 'px';
                 particule.style.top = y + 'px';
@@ -134,6 +162,12 @@
             creerTrace(positionX, positionY);
         }
 
+        function toggleTheme() {
+            document.body.classList.toggle('white-theme');
+            serpent.classList.toggle('white-theme');
+        }
+
+        toggleThemeButton.addEventListener('click', toggleTheme);
         setInterval(miseAJour, 1000 / 60);
         setInterval(changerDirectionAleatoire, 2000);
     </script>
