@@ -97,6 +97,28 @@
             background: black;
             box-shadow: 0 0 10px black;
         }
+
+        /* Style du bouton */
+        #toggleTheme {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        #toggleTheme:hover {
+            background-color: #666;
+        }
+
+        #toggleTheme:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
