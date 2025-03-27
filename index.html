@@ -18,7 +18,7 @@
             position: relative;
         }
 
-        /* Animation du serpent */
+        
         .serpent {
             position: absolute;
             width: 20px;
@@ -39,7 +39,7 @@
             }
         }
 
-        /* Traces lumineuses */
+        
         .trace {
             position: absolute;
             width: 15px;
@@ -60,7 +60,7 @@
             }
         }
 
-        /* Particules d'explosion */
+        
         .particule {
             position: absolute;
             width: 6px;
@@ -79,72 +79,187 @@
             }
         }
 
-        /* Carte horloge */
-        .clock-container {
+        
+        body.white-theme {
+            background: radial-gradient(circle, #fff, #eee);
+        }
+
+        .serpent.white-theme {
+            background: black;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .trace.white-theme {
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .particule.white-theme {
+            background: black;
+            box-shadow: 0 0 10px black;
+        }
+
+        
+        .toggle-switch {
             position: absolute;
             top: 20px;
-            left: 20px;
-            width: 200px;
-            height: 100px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
+            right: 20px;
+            width: 100px;
+            height: 50px;
+            --light: #d8dbe0;
+            --dark: #28292c;
+            --link: rgb(27, 129, 112);
+            --link-hover: rgb(24, 94, 82);
+        }
+
+        .switch-label {
+            position: absolute;
+            width: 100%;
+            height: 50px;
+            background-color: var(--dark);
+            border-radius: 25px;
+            cursor: pointer;
+            border: 3px solid var(--dark);
+        }
+
+        .checkbox {
+            position: absolute;
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+
+        .checkbox:checked ~ .slider {
+            background-color: var(--light);
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            -webkit-box-shadow: inset 12px -4px 0px 0px var(--light);
+            box-shadow: inset 12px -4px 0px 0px var(--light);
+            background-color: var(--dark);
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+        }
+
+        .checkbox:checked ~ .slider::before {
+            -webkit-transform: translateX(50px);
+            -ms-transform: translateX(50px);
+            transform: translateX(50px);
+            background-color: var(--dark);
+            -webkit-box-shadow: none;
+            box-shadow: none;
+        }
+
+        
+        .discord-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: transparent;
+            padding: 5px 15px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            color: white;
-            font-family: Arial, sans-serif;
-            font-size: 18px;
-            padding: 10px;
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid rgba(88, 101, 242, 1);
+            border-radius: 25px;
+            outline: none;
+            overflow: hidden;
+            color: rgba(88, 101, 242, 1);
+            transition: color 0.3s 0.1s ease-out;
             text-align: center;
         }
 
-        .clock-time {
-            font-size: 28px;
-            font-weight: bold;
+        .discord-button span {
+            margin: 10px;
         }
 
-        .clock-date {
-            font-size: 16px;
+        .discord-button::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            content: '';
+            border-radius: 50%;
+            display: block;
+            width: 20em;
+            height: 20em;
+            left: -5em;
+            text-align: center;
+            transition: box-shadow 0.5s ease-out;
+            z-index: -1;
         }
 
+        .discord-button:hover {
+            color: #fff;
+            border: 1px solid rgba(88, 101, 242, 1);
+        }
+
+        .discord-button:hover::before {
+            box-shadow: inset 0 0 0 10em rgba(88, 101, 242, 1);
+        }
     </style>
 </head>
 <body>
-
-    <!-- Carte de l'horloge -->
-    <div class="clock-container">
-        <div class="clock-time" id="clock-time">--:--</div>
-        <div class="clock-date" id="clock-date">--</div>
+    <div class="toggle-switch">
+        <label class="switch-label">
+            <input type="checkbox" class="checkbox" id="toggleTheme">
+            <span class="slider"></span>
+        </label>
     </div>
-
-    <!-- Serpent animé -->
     <div id="serpent" class="serpent"></div>
+    <a href="https://discordapp.com/users/552935813978259477" class="discord-button">
+        <svg viewBox="0 0 16 16" class="bi bi-discord" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path>
+        </svg>
+        <span>Discord</span>
+    </a>
 
     <script>
-        // Variables pour le serpent
         const serpent = document.getElementById('serpent');
+        const toggleThemeCheckbox = document.getElementById('toggleTheme');
         let positionX = Math.random() * window.innerWidth;
         let positionY = Math.random() * window.innerHeight;
         let vitesseX = (Math.random() - 0.5) * 10;
         let vitesseY = (Math.random() - 0.5) * 10;
 
-        // Création de traces lumineuses
         function creerTrace(x, y) {
             const trace = document.createElement('div');
             trace.classList.add('trace');
+            if (document.body.classList.contains('white-theme')) {
+                trace.classList.add('white-theme');
+            }
             document.body.appendChild(trace);
             trace.style.left = x + 'px';
             trace.style.top = y + 'px';
             setTimeout(() => trace.remove(), 600);
         }
 
-        // Création de particules d'explosion
         function creerParticules(x, y) {
             for (let i = 0; i < 7; i++) {
                 const particule = document.createElement('div');
                 particule.classList.add('particule');
+                if (document.body.classList.contains('white-theme')) {
+                    particule.classList.add('white-theme');
+                }
                 document.body.appendChild(particule);
                 particule.style.left = x + 'px';
                 particule.style.top = y + 'px';
@@ -153,13 +268,11 @@
             }
         }
 
-        // Changer direction aléatoirement
         function changerDirectionAleatoire() {
             vitesseX = (Math.random() - 0.5) * 10;
             vitesseY = (Math.random() - 0.5) * 10;
         }
 
-        // Mise à jour de la position du serpent
         function miseAJour() {
             positionX += vitesseX;
             positionY += vitesseY;
@@ -179,27 +292,14 @@
             creerTrace(positionX, positionY);
         }
 
-        setInterval(miseAJour, 1000 / 60);
-        setInterval(changerDirectionAleatoire, 2000);
-
-        // Mise à jour de l'horloge
-        function updateClock() {
-            const now = new Date();
-            let hours = now.getHours();
-            const minutes = now.getMinutes();
-            const ampm = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12 || 12;
-
-            document.getElementById("clock-time").textContent = `${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
-            
-            const options = { weekday: 'long', month: 'long', day: 'numeric' };
-            document.getElementById("clock-date").textContent = now.toLocaleDateString('fr-FR', options);
+        function toggleTheme() {
+            document.body.classList.toggle('white-theme');
+            serpent.classList.toggle('white-theme');
         }
 
-        setInterval(updateClock, 1000);
-        updateClock(); 
-
+        toggleThemeCheckbox.addEventListener('change', toggleTheme);
+        setInterval(miseAJour, 1000 / 60);
+        setInterval(changerDirectionAleatoire, 2000);
     </script>
-
 </body>
 </html>
