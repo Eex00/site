@@ -115,21 +115,29 @@ footer {
     overflow: hidden;
     border-right: 0.2em solid green; /* Curseur */
     margin-top: 1.5em;
+    width: 0; /* Commence avec une largeur de 0 */
+    animation: 
+        typeAndDelete 4s steps(14) infinite, /* Nombre de caractères dans "Hate them all" */
+        blinkCursor 0.5s step-end infinite alternate;
 }
 
-/* Style pour le bouton audio */
-button {
-    position: relative;
-    top: 100px;
-    padding: 10px 20px;
-    background-color: #0a0;
-    color: #fff;
-    font-size: 1.2em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+@keyframes blinkCursor {
+    50% {
+        border-right-color: transparent;
+    }
 }
 
-button:hover {
-    background-color: #080;
+@keyframes typeAndDelete {
+    0% {
+        width: 0;
+    }
+    45% {
+        width: 12em; /* Largeur finale, ajuste en fonction de ton texte */
+    }
+    55% {
+        width: 12em; /* Largeur pendant l'animation */
+    }
+    100% {
+        width: 0;
+    }
 }
