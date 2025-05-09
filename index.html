@@ -6,14 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Bouton stylisé pour démarrer la musique -->
-    <button onclick="playAudio()">Cliquez pour écouter la musique</button>
-
-    <audio id="audioPlayer" loop>
-        <source src="https://drive.google.com/uc?export=download&id=1AW8zXzd2F6_q_SfuN20KTgiivU8voG-d" type="audio/mp3">
-        Votre navigateur ne supporte pas l'élément audio.
-    </audio>
-
     <header>
         <h1>9MM</h1>
     </header>
@@ -23,21 +15,9 @@
         </div>
     </main>
 
+    <!-- Ajout du GIF en bas de la page -->
     <footer>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXBmemo1ZmZyMDNsZTVsZXoybjQxYzl6M2NubHhjOGl5azE1cThpeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7SfAXqgRgh0li/giphy.gif" alt="Gif animé" class="footer-gif">
+        <img src="https://media.giphy.com/media/3oKIPj91G5Sgji5bAk/giphy.gif" alt="Gif animé" class="footer-gif">
     </footer>
-
-    <script>
-        function playAudio() {
-            var audio = document.getElementById("audioPlayer");
-            if (audio.paused) {
-                audio.play();
-                console.log("Audio is playing");  // Vérifie si l'audio est lancé
-            } else {
-                audio.pause();
-                console.log("Audio is paused");  // Si l'audio est déjà en cours, il se met en pause
-            }
-        }
-    </script>
 </body>
 </html>
