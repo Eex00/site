@@ -1,31 +1,9 @@
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #000; /* fond noir */
-    text-align: center;
-    color: white; /* texte blanc par défaut */
-}
-
-header {
-    background-color: #000;
-    color: white;
-    padding: 20px 0;
-}
-
-h1 {
-    margin: 0;
-    font-size: 2.5em;
-    letter-spacing: 2px;
+    background-color: black !important;
 }
 
 .status-box {
-    display: inline-block;
-    margin-top: 100px;
-    padding: 20px 40px;
-    background-color: #00aa00; /* vert foncé */
-    color: white; /* texte blanc dans la boîte */
-    border: none;
-    border-radius: 10px;
-    font-size: 1.2em;
-    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
+    background-color: green !important;
+    color: white;
+    padding: 20px;
 }
