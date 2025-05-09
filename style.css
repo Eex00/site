@@ -1,8 +1,9 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: #000; /* fond noir */
     text-align: center;
+    color: white; /* texte blanc par défaut */
 }
 
 header {
@@ -21,9 +22,10 @@ h1 {
     display: inline-block;
     margin-top: 100px;
     padding: 20px 40px;
-    background-color: white;
-    border: 2px solid #333;
+    background-color: #00aa00; /* vert foncé */
+    color: white; /* texte blanc dans la boîte */
+    border: none;
     border-radius: 10px;
     font-size: 1.2em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 255, 0, 0.3);
 }
