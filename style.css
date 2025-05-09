@@ -27,3 +27,7 @@ h1 {
     font-size: 1.2em;
     box-shadow: 0 4px 10px rgb(0 0 0 / 20%);
 }
+
+.status-green {
+    color: #00ff00; /* vert clair */
+}
