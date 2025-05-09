@@ -30,7 +30,13 @@
     <script>
         function playAudio() {
             var audio = document.getElementById("audioPlayer");
-            audio.play();
+            if (audio.paused) {
+                audio.play();
+                console.log("Audio is playing");  // Vérifie si l'audio est lancé
+            } else {
+                audio.pause();
+                console.log("Audio is paused");  // Si l'audio est déjà en cours, il se met en pause
+            }
         }
     </script>
 </body>
