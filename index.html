@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Ajout de l'audio qui se lance automatiquement -->
-    <audio id="audioPlayer" autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-    Votre navigateur ne supporte pas l'élément audio.
-</audio>
+    <!-- Ajout d'un bouton pour démarrer la musique -->
+    <button onclick="playAudio()">Cliquez pour écouter la musique</button>
+
+    <audio id="audioPlayer" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        Votre navigateur ne supporte pas l'élément audio.
+    </audio>
 
     <header>
         <h1>9MM</h1>
@@ -21,9 +23,15 @@
         </div>
     </main>
 
-    <!-- Ajout du GIF en bas de la page -->
     <footer>
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXBmemo1ZmZyMDNsZTVsZXoybjQxYzl6M2NubHhjOGl5azE1cThpeiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7SfAXqgRgh0li/giphy.gif" alt="Gif animé" class="footer-gif">
     </footer>
+
+    <script>
+        function playAudio() {
+            var audio = document.getElementById("audioPlayer");
+            audio.play();
+        }
+    </script>
 </body>
 </html>
