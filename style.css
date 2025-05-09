@@ -32,9 +32,9 @@ h1 {
     color: #00ff00; /* vert clair */
 }
 
-/* Nouveau CSS pour centrer le GIF en bas de la page */
+/* Nouveau CSS pour le footer et le GIF */
 footer {
-    margin-top: 50px;
+    margin-top: 100px;  /* Augmenté pour le faire descendre plus bas */
     padding: 20px 0;
 }
 
