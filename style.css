@@ -57,10 +57,10 @@ footer {
     width: 12em;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
+    position: fixed;  /* Fixe le terminal en haut à droite */
+    top: 20px;        /* Décale un peu du bord supérieur */
+    right: 20px;      /* Décale un peu du bord droit */
+    z-index: 999;     /* S'assurer qu'il est au-dessus du contenu */
     overflow: hidden;
     box-sizing: border-box;
 }
@@ -113,11 +113,11 @@ footer {
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 0.2em solid green;
+    border-right: 0.2em solid green; /* Curseur */
     margin-top: 1.5em;
-    width: 0;
+    width: 0; /* Commence avec une largeur de 0 */
     animation: 
-        typeAndDelete 4s steps(14) infinite,
+        typeAndDelete 4s steps(14) infinite, /* Nombre de caractères dans "Hate them all" */
         blinkCursor 0.5s step-end infinite alternate;
 }
 
@@ -132,52 +132,12 @@ footer {
         width: 0;
     }
     45% {
-        width: 12em;
+        width: 12em; /* Largeur finale, ajuste en fonction de ton texte */
     }
     55% {
-        width: 12em;
+        width: 12em; /* Largeur pendant l'animation */
     }
     100% {
         width: 0;
     }
-}
-
-/* --- Bouton flottant GitHub --- */
-.btn {
-    display: grid;
-    place-items: center;
-    background: #e3edf7;
-    padding: 1.4em;
-    border-radius: 10px;
-    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
-                -6px -6px 10px -1px rgba(255,255,255,0.7);
-    border: 1px solid rgba(0,0,0,0);
-    cursor: pointer;
-    transition: transform 0.5s;
-}
-
-.btn:hover {
-    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
-                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
-                -0.5px -0.5px 0px rgba(255,255,255,1),
-                0.5px 0.5px 0px rgba(0,0,0,0.15),
-                0px 12px 10px -10px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.1);
-    transform: translateY(0.5em);
-}
-
-.btn svg {
-    transition: transform 0.5s;
-}
-
-.btn:hover svg {
-    transform: scale(0.9);
-    fill: #333333;
-}
-
-.floating-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
 }
