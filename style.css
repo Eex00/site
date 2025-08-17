@@ -36,3 +36,53 @@
 @keyframes blink {
     50% { border-color: transparent; }
 }
+
+/* Main site content styles */
+#site-content {
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Courier New", monospace;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 2rem;
+}
+
+.status-box {
+    font-size: 1.5em;
+    margin: 2rem 0;
+}
+
+.status-green {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.btn {
+    margin: 2rem 0;
+}
+
+footer {
+    margin-top: 2rem;
+}
+
+.footer-gif {
+    max-width: 200px;
+    height: auto;
+}
