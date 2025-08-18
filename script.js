@@ -34,10 +34,8 @@ function typeLine() {
         const colorClass = getColorClass(line);
 
         if (charIndex < line.length) {
-            const currentChar = line.charAt(charIndex)
-                .replace(/ /g, '&nbsp;');
+            const currentChar = line.charAt(charIndex).replace(/ /g, '&nbsp;');
 
-            ]
             if (charIndex <= line.indexOf("]")) {
                 terminalText.innerHTML += `<span class="${colorClass}">${currentChar}</span>`;
             } else {
@@ -45,12 +43,12 @@ function typeLine() {
             }
 
             charIndex++;
-            setTimeout(typeLine,8); 
+            setTimeout(typeLine, 8);
         } else {
             terminalText.innerHTML += "<br>";
             charIndex = 0;
             lineIndex++;
-            setTimeout(typeLine, 100); 
+            setTimeout(typeLine, 100);
         }
     } else {
         setTimeout(() => {
@@ -65,7 +63,7 @@ function typeLine() {
 
 typeLine();
 
-
+// --- Background console ---
 const consoleMessages = [
     "[CMD] /info",
     "[INFO] guns.lol: https://guns.lol/4am",
@@ -103,7 +101,6 @@ function startBackgroundConsole() {
                 const currentChar = message.charAt(consoleCharIndex);
                 const coloredChar = `<span class="${colorClass}">${currentChar}</span>`;
                 
-                
                 if (consoleCharIndex <= message.indexOf("]")) {
                     currentLine.innerHTML += coloredChar;
                 } else {
@@ -111,27 +108,21 @@ function startBackgroundConsole() {
                 }
                 
                 consoleCharIndex++;
-                
-                
                 consoleOutput.scrollTop = consoleOutput.scrollHeight;
                 
-                setTimeout(typeConsoleMessage, 30); // typing speed
+                setTimeout(typeConsoleMessage, 30);
             } else {
-                
                 consoleCharIndex = 0;
                 consoleIndex++;
-                
                 
                 const currentLine = document.getElementById('console-current-line');
                 if (currentLine) {
                     currentLine.removeAttribute('id');
                 }
                 
-                
                 setTimeout(typeConsoleMessage, 500);
             }
         } else {
-            
             const clearLine = document.createElement('div');
             clearLine.id = 'console-current-line';
             consoleOutput.appendChild(clearLine);
@@ -153,7 +144,6 @@ function startBackgroundConsole() {
                     clearCharIndex++;
                     setTimeout(typeClear, 30);
                 } else {
-                    
                     setTimeout(() => {
                         consoleOutput.innerHTML = '';
                         consoleIndex = 0;
@@ -170,7 +160,6 @@ function startBackgroundConsole() {
     typeConsoleMessage();
 }
 
-
 const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && 
@@ -183,5 +172,3 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(siteContent, { attributes: true, attributeFilter: ['style'] });
-
-
