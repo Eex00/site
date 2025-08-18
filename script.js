@@ -45,12 +45,12 @@ function typeLine() {
             }
 
             charIndex++;
-            setTimeout(typeLine, 10); // typing speed
+            setTimeout(typeLine,8); // typing speed
         } else {
             terminalText.innerHTML += "<br>";
             charIndex = 0;
             lineIndex++;
-            setTimeout(typeLine, 600); // pause between lines
+            setTimeout(typeLine, 100); // pause between lines
         }
     } else {
         setTimeout(() => {
