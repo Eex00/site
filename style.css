@@ -22,7 +22,6 @@
     text-align: left;
 }
 
-
 #terminal-text span.boot  { color: #ffffff; }
 #terminal-text span.ok    { color: #00ff00; }
 #terminal-text span.info  { color: #00aaff; }
@@ -87,7 +86,7 @@ footer {
     height: auto;
 }
 
-
+/* Background console */
 #background-console {
     position: fixed;
     top: 20px;
@@ -123,4 +122,4 @@ footer {
 .console-ok { color: #00ff00; }
 .console-warn { color: #ffaa00; }
 .console-error { color: #ff3333; }
-
+.console-cmd { color: #ff00ff; }
