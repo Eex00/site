@@ -183,3 +183,5 @@ const observer = new MutationObserver((mutations) => {
 });
 
 observer.observe(siteContent, { attributes: true, attributeFilter: ['style'] });
+
+
