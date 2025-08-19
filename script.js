@@ -3,6 +3,7 @@ const siteContent = document.getElementById("site-content");
 const intro = document.getElementById("intro-terminal");
 
 const lines = [
+    "[INFO] ITS ONLY AN INTRO SCREEN",
     "[BOOT] System initialization...",
     "[OK] Hardware check...",
     "[INFO] Loading network modules...",
@@ -56,6 +57,9 @@ function typeLine() {
             setTimeout(() => {
                 intro.style.display = "none";
                 siteContent.style.display = "block";
+                
+                // Start YouTube music after intro
+                initializeMusicAfterIntro();
             }, 500);
         }, 800);
     }
