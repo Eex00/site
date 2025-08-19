@@ -1,15 +1,15 @@
-/* VIDEO BACKGROUND */
 #video-background {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: 50%;
+    left: 50%;
+    width: 120%;   
+    height: 120%;  
+    transform: translate(-50%, -50%);
     z-index: -1;
     pointer-events: none;
 }
 
-/* Écran terminal */
+
 #intro-terminal {
     position: fixed;
     top: 0; left: 0;
@@ -47,7 +47,7 @@
     50% { border-color: transparent; }
 }
 
-/* Main site content styles */
+
 #site-content {
     color: white;
     min-height: 100vh;
@@ -95,7 +95,7 @@ footer {
     height: auto;
 }
 
-/* Background console */
+
 #background-console {
     position: fixed;
     top: 20px;
@@ -133,7 +133,7 @@ footer {
 .console-error { color: #ff3333; }
 .console-cmd { color: #ff00ff; }
 
-/* --- Audio player (top-left) --- */
+
 #music-player {
     position: fixed;
     top: 10px;
@@ -145,12 +145,12 @@ footer {
     box-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
-/* Cache le lecteur audio natif */
+
 #audio-player {
     display: none;
 }
 
-/* --- Custom slider from Uiverse.io --- */
+
 .slider {
   --slider-width: 150px;
   --slider-height: 6px;
