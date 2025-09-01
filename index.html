@@ -27,6 +27,7 @@
       60% {text-shadow: -2px -2px red, 2px 2px blue;}
       100% {text-shadow: 2px 0 red, -2px 0 blue;}
     }
+    .typewriter{opacity:.7;font-family:'IBM Plex Mono',monospace;display:inline-block;border-right:2px solid var(--accent);white-space:nowrap;overflow:hidden;}
     .section{margin-top:60px;}
     .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:20px;}
     .card{background:#111;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;transition:.3s}
@@ -53,16 +54,27 @@
     [data-theme="fsociety"] .term-head{background:#111;border-bottom:1px solid #0f0;}
     .dot{width:12px;height:12px;border-radius:50%}
     .red{background:#ff5f56}.yellow{background:#ffbd2e}.green{background:#27c93f}
-    .term-body{padding:14px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.5}
+    .term-body{padding:14px;font-family:'IBM Plex Mono',monospace;font-size:14px;line-height:1.5;max-height:300px;overflow-y:auto;}
     .term-line{white-space:pre-wrap}
     .term-prompt{color:var(--accent)}
     .term-input{background:transparent;border:none;outline:none;color:var(--text);width:100%;font:inherit}
     .toggle-theme{position:fixed;top:20px;right:20px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);padding:8px 12px;cursor:pointer;box-shadow:var(--shadow)}
     .ascii{font-family:'IBM Plex Mono',monospace;white-space:pre;font-size:10px;line-height:1.2;color:var(--accent);}
+    .stats{display:flex;justify-content:center;gap:30px;margin-top:40px;flex-wrap:wrap;}
+    .stat{background:#111;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);min-width:120px;text-align:center;}
+    .stat h3{color:var(--accent);font-size:1.8rem;}
+    .stat p{color:var(--muted);font-size:.9rem;}
+    [data-theme="light"] .stat{background:#fff;}
+    [data-theme="fsociety"] .stat{background:#010;}
+    .cards .card {
+  cursor: pointer; 
+  transition: transform 0.3s, color 0.3s;
+}
 
-    
-    .challenge { color: var(--text); text-decoration: none; transition: color 0.3s, transform 0.2s; }
-    .challenge:hover { color: var(--accent); transform: scale(1.05); }
+.cards .card:hover h3,
+.cards .card:hover p {
+  color: var(--accent); 
+}
   </style>
 </head>
 <body>
@@ -72,7 +84,18 @@
       <img src="https://github.com/Eex00.png" alt="photo de profil" />
       <h1 class="glitch">Salut, je suis Ex0</h1>
       <p>Apprenti en cybersécurité 🇧🇪 — Python, hacking éthique, forensique numérique.</p>
-      <p style="opacity:.7;font-family:'IBM Plex Mono',monospace;">"Hello, friend."</p>
+      <p id="typewriter" class="typewriter"></p>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <h3 id="countProjects">0</h3>
+        <p>Projets</p>
+      </div>
+      <div class="stat">
+        <h3 id="countChallenges">0</h3>
+        <p>Challenges Root-Me</p>
+      </div>
     </section>
 
     <section class="section">
@@ -160,83 +183,197 @@
     </section>
 
     <section class="section">
-      <h2>Terminal </h2>
+      <h2>Terminal interactif</h2>
       <div class="terminal">
         <div class="term-head">
           <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
         </div>
         <div class="term-body" id="termBody">
           <div class="term-line">Bienvenue terminal Ex0 — tapez help</div>
-          <div class="term-line"><span class="term-prompt">ex0@page:$</span> <input id="termInput" class="term-input" /></div>
         </div>
       </div>
     </section>
 
     <footer>
-      <img src="https://github.com/Eex00.png" alt="footer avatar" style="width:60px;height:60px;border-radius:50%;margin-bottom:8px;">
       <div>© 2025 Ex0 — Portfolio personnel 🎭</div>
     </footer>
   </div>
 
-  <script>
-    
-    const commands = {
-      help: () => ['help – voir commandes','about – info brève','projects – voir mes projets','contact – liens de contact','clear – nettoyer écran','fsociety – mode secret'],
-      about: () => ['Je suis Ex0, apprenti cybersécurité, basé en Belgique.'],
-      projects: () => ['- Project Shadow Mint','- YouTube Downloader','- Plus à venir'],
-      contact: () => ['GitHub: https://github.com/Eex00','guns.lol: https://guns.lol/4am','Discord: https://discord.com/users/552935813978259477'],
-      fsociety: () => {document.body.setAttribute('data-theme','fsociety'); return ["fsociety mode activé.","Welcome to the revolution.","⠀⠀⠀⠀⠀⣠⣤⣤⣤⣄⠀⠀⠀⠀⠀","⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀","⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀","⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀","⠀⠀⣿⣿⡿⠿⠿⠿⠿⣿⣿⣿⠀⠀⠀"]},
-      clear: () => {clearTerminal();return[]}
-    };
+<script>
+  
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('load', () => { window.scrollTo(0,0); });
 
-    function clearTerminal(){document.querySelectorAll('.term-line').forEach((ln,i)=>{if(i>0)ln.remove();});}
-    const input=document.getElementById('termInput');
-    const termBody=document.getElementById('termBody');
-    input.addEventListener('keydown',e=>{
+  
+  const text="Hello, friend.";
+  let i=0;
+  function typeWriter(){
+    if(i<text.length){
+      document.getElementById("typewriter").textContent+=text.charAt(i);
+      i++;
+      setTimeout(typeWriter,150);
+    }
+  }
+  typeWriter();
+
+  
+  const statProjects = document.getElementById('countProjects').parentNode;
+  const statChallenges = document.getElementById('countChallenges').parentNode;
+  [statProjects, statChallenges].forEach(stat => {
+    stat.style.cursor = 'pointer';
+    stat.addEventListener('mouseenter', () => { stat.style.transform='translateY(-4px)'; });
+    stat.addEventListener('mouseleave', () => { stat.style.transform='translateY(0)'; });
+  });
+  statProjects.addEventListener('click', () => { window.open('https://github.com/Eex00?tab=repositories','_blank'); });
+  statChallenges.addEventListener('click', () => {
+    const headings = document.querySelectorAll('section h2');
+    let challengesSection = null;
+    headings.forEach(h2 => { if(h2.textContent.trim()==="Challenges Root-Me") challengesSection=h2; });
+    if(challengesSection){
+      const yOffset=-80;
+      const y = challengesSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top:y,behavior:'smooth'});
+    }
+  });
+
+  function animateValue(id,start,end,duration){
+    const obj=document.getElementById(id);
+    let startTime=null;
+    function step(timestamp){
+      if(!startTime) startTime=timestamp;
+      const progress=Math.min((timestamp-startTime)/duration,1);
+      obj.textContent=Math.floor(progress*(end-start)+start);
+      if(progress<1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+  animateValue("countProjects",0,12,2000);
+  animateValue("countChallenges",0,5,2000);
+
+  
+  const termBody = document.getElementById('termBody');
+  const commands = {
+    help: () => ['help – voir commandes','about – info brève','projects – voir mes projets','contact – liens de contact','clear – nettoyer écran','fsociety – mode secret'],
+    about: () => ['Je suis Ex0, apprenti cybersécurité, basé en Belgique.'],
+    projects: () => ['- Project Shadow Mint','- YouTube Downloader','- Plus à venir'],
+    contact: () => ['GitHub: https://github.com/Eex00','guns.lol: https://guns.lol/4am','Discord: https://discord.com/users/552935813978259477'],
+    fsociety: () => {document.body.setAttribute('data-theme','fsociety'); return ["fsociety mode activé.","Welcome to the revolution."];},
+    clear: () => {clearTerminal();return[];}
+  };
+
+  function createInputLine(focus=true){
+    const newLine = document.createElement('div');
+    newLine.className='term-line';
+    newLine.innerHTML=`<span class="term-prompt">ex0@page:$</span> <input class="term-input" />`;
+    termBody.appendChild(newLine);
+    const input = newLine.querySelector('.term-input');
+    if(focus) input.focus();
+    input.addEventListener('keydown', e => {
       if(e.key==='Enter'){
         const val=input.value.trim();
-        const prompt=document.createElement('div');
+        const prompt = document.createElement('div');
         prompt.className='term-line';
         prompt.innerHTML=`<span class="term-prompt">ex0@page:$</span> ${val}`;
-        termBody.insertBefore(prompt,input.parentNode);
-        if(commands[val])commands[val]().forEach(line=>{const d=document.createElement('div');d.className='term-line';d.textContent=line;termBody.insertBefore(d,input.parentNode);});
+        termBody.insertBefore(prompt,newLine);
+
+        if(commands[val]){
+          commands[val]().forEach(line=>{
+            const d=document.createElement('div');
+            d.className='term-line';
+            d.textContent=line;
+            termBody.insertBefore(d,newLine);
+          });
+        }
+
         input.value='';
+        termBody.scrollTop=termBody.scrollHeight;
       }
     });
+    termBody.scrollTop=termBody.scrollHeight;
+  }
 
-    
-    new Chart(document.getElementById('skillsChart'),{
-      type:'radar',
-      data:{labels:['Python','Réseau','Sécurité','Forensique','Linux'],datasets:[{label:'Compétences',data:[8,6,7,5,6],fill:true,backgroundColor:'rgba(255,0,0,0.2)',borderColor:'rgba(255,0,0,0.8)',pointBackgroundColor:'rgba(255,0,0,1)'}]},
-      options:{scales:{r:{angleLines:{color:'rgba(255,255,255,.1)'},grid:{color:'rgba(255,255,255,.1)'},pointLabels:{color:'var(--text)'},ticks:{display:false}}},plugins:{legend:{labels:{color:'var(--text)'}}}}
-    });
+  function clearTerminal(){
+    document.querySelectorAll('.term-line').forEach((ln,i)=>{ if(i>0) ln.remove(); });
+    createInputLine();
+  }
 
-    
-    const btn=document.getElementById('toggleTheme');
-    btn.addEventListener('click',()=>{
-      if(document.body.getAttribute('data-theme')==='light'){
-        document.body.removeAttribute('data-theme');
-        btn.textContent='🌙';
-      } else if(document.body.getAttribute('data-theme')==='fsociety'){
-        document.body.removeAttribute('data-theme');
-        btn.textContent='🌙';
-      } else {
-        document.body.setAttribute('data-theme','light');
-        btn.textContent='☀️';
+  createInputLine(true);
+
+  document.querySelector('.terminal').addEventListener('click',()=>{
+    const lastInput = termBody.querySelector('.term-input:last-of-type');
+    if(lastInput) lastInput.focus();
+  });
+
+  
+const projectCards = document.querySelectorAll('.cards .card');
+
+projectCards.forEach(card => {
+  const title = card.querySelector('h3').textContent;
+
+  
+  card.addEventListener('click', () => {
+    if(title.includes('Shadow Mint')){
+      window.open('https://github.com/Eex00/Project-shadow-mint', '_blank');
+    } else if(title.includes('YouTube Downloader')){
+      window.open('https://github.com/Eex00/youtube-downloader', '_blank');
+    } else if(title.includes('Plus à venir')){
+      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+    }
+  });
+});
+
+  
+  new Chart(document.getElementById('skillsChart'), {
+    type:'radar',
+    data:{
+      labels:['Python','Réseau','Sécurité','Forensique','Linux'],
+      datasets:[
+        {label:'Compétences',data:[8,6,7,5,6],fill:true,backgroundColor:'rgba(255,0,0,0.2)',borderColor:'rgba(255,0,0,0.8)',pointBackgroundColor:'rgba(255,0,0,1)'},
+        {label:'Devenir',data:[5,5,9,4,5],fill:true,backgroundColor:'rgba(0,255,0,0.2)',borderColor:'rgba(0,255,0,0.8)',pointBackgroundColor:'rgba(0,255,0,1)'}
+      ]
+    },
+    options:{
+      scales:{
+        r:{
+          angleLines:{color:'rgba(255,255,255,.1)'},
+          grid:{color:'rgba(255,255,255,.1)'},
+          pointLabels:{color:()=>getComputedStyle(document.body).getPropertyValue('--text')},
+          ticks:{display:false}
+        }
+      },
+      plugins:{
+        legend:{
+          labels:{color:()=>getComputedStyle(document.body).getPropertyValue('--text')},
+          onHover:(e)=>{e.native.target.style.cursor='pointer';},
+          onLeave:(e)=>{e.native.target.style.cursor='default';}
+        }
       }
-    });
+    }
+  });
 
-    
-    const heroTitle=document.querySelector('.hero h1');
-    let clickCount=0;
-    heroTitle.addEventListener('click',()=>{
-      clickCount++;
-      if(clickCount===3){
-        alert("MR. ROBOT ASCII:\n\n  /\/\/\ \n ( o   o ) \n  >  -  <  ");
-        clickCount=0;
-      }
-      setTimeout(()=>clickCount=0,1000);
-    });
-  </script>
+  
+  const btn=document.getElementById('toggleTheme');
+  btn.addEventListener('click',()=>{
+    if(document.body.getAttribute('data-theme')==='light' || document.body.getAttribute('data-theme')==='fsociety'){
+      document.body.removeAttribute('data-theme');
+      btn.textContent='🌙';
+    }else{
+      document.body.setAttribute('data-theme','light');
+      btn.textContent='☀️';
+    }
+  });
+
+  // Easter egg
+  const heroTitle=document.querySelector('.hero h1');
+  let clickCount=0;
+  heroTitle.addEventListener('click',()=>{
+    clickCount++;
+    if(clickCount===1){
+      alert("MR. ROBOT ASCII:\n\n  /\/\/\\ \n ( o   o ) \n  >  -  <  ");
+      clickCount=0;
+    }
+    setTimeout(()=>clickCount=0,1000);
+  });
+</script>
 </body>
 </html>
