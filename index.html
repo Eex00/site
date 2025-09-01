@@ -67,102 +67,119 @@
     [data-theme="light"] .stat{background:#fff;}
     [data-theme="fsociety"] .stat{background:#010;}
     .cards .card {
-  cursor: pointer; 
+  cursor: pointer;
   transition: transform 0.3s, color 0.3s;
 }
 
 .cards .card:hover h3,
 .cards .card:hover p {
-  color: var(--accent); 
+  color: var(--accent);
 }
+.lang-selector {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .lang-selector img {
+      width: 30px;
+      cursor: pointer;
+      margin-right: 10px;
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body>
+  <div class="lang-selector">
+    <img src="https://flagcdn.com/fr.svg" alt="Français" id="lang-fr">
+    <img src="https://flagcdn.com/gb.svg" alt="English" id="lang-en">
+  </div>
   <button class="toggle-theme" id="toggleTheme">🌙</button>
   <div class="container">
     <section class="hero">
       <img src="https://github.com/Eex00.png" alt="photo de profil" />
-      <h1 class="glitch">Salut, je suis Ex0</h1>
-      <p>Apprenti en cybersécurité 🇧🇪 — Python, hacking éthique, forensique numérique.</p>
+      <h1 class="glitch" data-translate="hero_title">Salut, je suis Ex0</h1>
+      <p data-translate="hero_subtitle">Apprenti en cybersécurité 🇧🇪 — Python, hacking éthique, forensique numérique.</p>
       <p id="typewriter" class="typewriter"></p>
     </section>
 
     <section class="stats">
       <div class="stat">
         <h3 id="countProjects">0</h3>
-        <p>Projets</p>
+        <p data-translate="projects">Projets</p>
       </div>
       <div class="stat">
         <h3 id="countChallenges">0</h3>
-        <p>Challenges Root-Me</p>
+        <p data-translate="challenges">Challenges Root-Me</p>
       </div>
     </section>
 
     <section class="section">
-      <h2>À propos</h2>
-      <p>Just a guy trying to learn cybersecurity. Passionné par la sécurité réseau, l'automatisation en Python et les défis techniques.</p>
+      <h2 data-translate="about_title">À propos</h2>
+      <p data-translate="about_text">Just a guy trying to learn cybersecurity. Passionné par la sécurité réseau, l'automatisation en Python et les défis techniques.</p>
     </section>
 
     <section class="section">
-      <h2>Compétences</h2>
+      <h2 data-translate="skills_title">Compétences</h2>
       <div class="skills">
         <div class="card">
-          <h3>Langages & Outils</h3>
+          <h3 data-translate="skills_tools_title">Langages & Outils</h3>
           <div class="skills-icons">
             <i>🐍</i><i>💻</i><i>🌐</i>
           </div>
           <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
           <p>Python</p>
           <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
-          <p>Réseau</p>
+          <p data-translate="network">Réseau</p>
           <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
-          <p>Sécurité</p>
+          <p data-translate="security">Sécurité</p>
         </div>
         <div class="card">
-          <h3>Niveaux (Radar)</h3>
+          <h3 data-translate="skills_chart_title">Niveaux (Radar)</h3>
           <canvas id="skillsChart" height="220"></canvas>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Projets</h2>
+      <h2 data-translate="projects_title">Projets</h2>
       <div class="cards">
         <div class="card">
-          <h3>Project Shadow Mint</h3>
-          <p>Script Python “EDUCATIONAL PURPOSE ONLY” pour tester des sites. Exploration technique et apprentissage.</p>
+          <h3 data-translate="project1_title">Project Shadow Mint</h3>
+          <p data-translate="project1_desc">Script Python “EDUCATIONAL PURPOSE ONLY” pour tester des sites. Exploration technique et apprentissage.</p>
         </div>
         <div class="card">
-          <h3>YouTube Downloader</h3>
-          <p>Script Python (yt-dlp) pour télécharger des vidéos YouTube facilement, en choisissant l'emplacement.</p>
+          <h3 data-translate="project2_title">YouTube Downloader</h3>
+          <p data-translate="project2_desc">Script Python (yt-dlp) pour télécharger des vidéos YouTube facilement, en choisissant l'emplacement.</p>
         </div>
         <div class="card">
-          <h3>Plus à venir…</h3>
-          <p>Explorations futures en cybersécurité et automation.</p>
+          <h3 data-translate="project3_title">Plus à venir…</h3>
+          <p data-translate="project3_desc">Explorations futures en cybersécurité et automation.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Parcours</h2>
+      <h2 data-translate="journey_title">Parcours</h2>
       <div class="timeline">
         <div class="timeline-item">
           <h3>2023</h3>
-          <p>Premiers scripts en Python et découverte de Root-Me.</p>
+          <p data-translate="journey1">Premiers scripts en Python et découverte de Root-Me.</p>
         </div>
         <div class="timeline-item">
           <h3>2024</h3>
-          <p>Début apprentissage hacking éthique, projets GitHub, exploration forensique.</p>
+          <p data-translate="journey2">Début apprentissage hacking éthique, projets GitHub, exploration forensique.</p>
         </div>
         <div class="timeline-item">
           <h3>2025</h3>
-          <p>Construction de portfolio, perfectionnement Linux & réseau.</p>
+          <p data-translate="journey3">Construction de portfolio, perfectionnement Linux & réseau.</p>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <h2>Challenges Root-Me</h2>
+      <h2 data-translate="rootme_title">Challenges Root-Me</h2>
       <ul>
         <li><a href="https://www.root-me.org/fr/Challenges/Reseau/TELNET-authentification" target="_blank" class="challenge">TELNET 1</a></li>
         <li><a href="https://www.root-me.org/fr/Challenges/Reseau/FTP-Authentification" target="_blank" class="challenge">FTP 1</a></li>
@@ -173,7 +190,7 @@
     </section>
 
     <section class="section">
-      <h2>Me contacter</h2>
+      <h2 data-translate="contact_title">Me contacter</h2>
       <img src="https://github.com/Eex00.png" alt="profil" style="width:90px;height:90px;border-radius:50%;margin:10px 0;box-shadow:0 0 10px rgba(255,0,0,.4)">
       <ul>
         <li><a href="https://github.com/Eex00" target="_blank">GitHub</a></li>
@@ -183,31 +200,120 @@
     </section>
 
     <section class="section">
-      <h2>Terminal interactif</h2>
+      <h2 data-translate="terminal_title">Terminal interactif</h2>
       <div class="terminal">
         <div class="term-head">
           <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
         </div>
         <div class="term-body" id="termBody">
-          <div class="term-line">Bienvenue terminal Ex0 — tapez help</div>
+          <div class="term-line" data-translate="terminal_welcome">Bienvenue terminal Ex0 — tapez help</div>
         </div>
       </div>
     </section>
 
     <footer>
-      <div>© 2025 Ex0 — Portfolio personnel 🎭</div>
+      <div data-translate="footer_text">© 2025 Ex0 — Portfolio personnel 🎭</div>
     </footer>
   </div>
 
 <script>
+
+  const translations = {
+    en: {
+      hero_title: "Hi, I'm Ex0",
+      hero_subtitle: "Cybersecurity apprentice 🇧🇪 — Python, ethical hacking, digital forensics.",
+      typewriter_text: "Hello, friend.",
+      projects: "Projects",
+      challenges: "Root-Me Challenges",
+      about_title: "About",
+      about_text: "Just a guy trying to learn cybersecurity. Passionate about network security, Python automation and technical challenges.",
+      skills_title: "Skills",
+      skills_tools_title: "Languages & Tools",
+      network: "Network",
+      security: "Security",
+      skills_chart_title: "Levels (Radar)",
+      projects_title: "Projects",
+      project1_title: "Project Shadow Mint",
+      project1_desc: "Python script “EDUCATIONAL PURPOSE ONLY” to test websites. Technical exploration and learning.",
+      project2_title: "YouTube Downloader",
+      project2_desc: "Python script (yt-dlp) to easily download YouTube videos, choosing the location.",
+      project3_title: "More to come…",
+      project3_desc: "Future explorations in cybersecurity and automation.",
+      journey_title: "Journey",
+      journey1: "First Python scripts and discovery of Root-Me.",
+      journey2: "Started learning ethical hacking, GitHub projects, exploring forensics.",
+      journey3: "Building a portfolio, perfecting Linux & networking.",
+      rootme_title: "Root-Me Challenges",
+      contact_title: "Contact me",
+      terminal_title: "Interactive Terminal",
+      terminal_welcome: "Welcome to Ex0 terminal — type help",
+      footer_text: "© 2025 Ex0 — Personal Portfolio 🎭",
+      help_command: ['help – see commands','about – brief info','projects – see my projects','contact – contact links','clear – clear screen','fsociety – secret mode'],
+      about_command: ["I'm Ex0, a cybersecurity apprentice based in Belgium."],
+      projects_command: ['- Project Shadow Mint','- YouTube Downloader','- More to come'],
+      contact_command: ['GitHub: https://github.com/Eex00','guns.lol: https://guns.lol/4am','Discord: https://discord.com/users/552935813978259477'],
+      fsociety_command: ["fsociety mode activated.","Welcome to the revolution."]
+    },
+    fr: {
+      hero_title: "Salut, je suis Ex0",
+      hero_subtitle: "Apprenti en cybersécurité 🇧🇪 — Python, hacking éthique, forensique numérique.",
+      typewriter_text: "Hello, friend.",
+      projects: "Projets",
+      challenges: "Challenges Root-Me",
+      about_title: "À propos",
+      about_text: "Just a guy trying to learn cybersecurity. Passionné par la sécurité réseau, l'automatisation en Python et les défis techniques.",
+      skills_title: "Compétences",
+      skills_tools_title: "Langages & Outils",
+      network: "Réseau",
+      security: "Sécurité",
+      skills_chart_title: "Niveaux (Radar)",
+      projects_title: "Projets",
+      project1_title: "Project Shadow Mint",
+      project1_desc: "Script Python “EDUCATIONAL PURPOSE ONLY” pour tester des sites. Exploration technique et apprentissage.",
+      project2_title: "YouTube Downloader",
+      project2_desc: "Script Python (yt-dlp) pour télécharger des vidéos YouTube facilement, en choisissant l'emplacement.",
+      project3_title: "Plus à venir…",
+      project3_desc: "Explorations futures en cybersécurité et automation.",
+      journey_title: "Parcours",
+      journey1: "Premiers scripts en Python et découverte de Root-Me.",
+      journey2: "Début apprentissage hacking éthique, projets GitHub, exploration forensique.",
+      journey3: "Construction de portfolio, perfectionnement Linux & réseau.",
+      rootme_title: "Challenges Root-Me",
+      contact_title: "Me contacter",
+      terminal_title: "Terminal interactif",
+      terminal_welcome: "Bienvenue terminal Ex0 — tapez help",
+      footer_text: "© 2025 Ex0 — Portfolio personnel 🎭",
+      help_command: ['help – voir commandes','about – info brève','projects – voir mes projets','contact – liens de contact','clear – nettoyer écran','fsociety – mode secret'],
+      about_command: ['Je suis Ex0, apprenti cybersécurité, basé en Belgique.'],
+      projects_command: ['- Project Shadow Mint','- YouTube Downloader','- Plus à venir'],
+      contact_command: ['GitHub: https://github.com/Eex00','guns.lol: https://guns.lol/4am','Discord: https://discord.com/users/552935813978259477'],
+      fsociety_command: ["fsociety mode activé.","Welcome to the revolution."]
+    }
+  };
+
+  let currentLang = 'fr';
+
+  function translatePage(lang) {
+    document.documentElement.lang = lang;
+    currentLang = lang;
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      el.textContent = translations[lang][key];
+    });
+    i = 0;
+    document.getElementById("typewriter").textContent = "";
+    typeWriter();
+  }
+
+  document.getElementById('lang-fr').addEventListener('click', () => translatePage('fr'));
+  document.getElementById('lang-en').addEventListener('click', () => translatePage('en'));
   
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   window.addEventListener('load', () => { window.scrollTo(0,0); });
 
-  
-  const text="Hello, friend.";
   let i=0;
   function typeWriter(){
+    const text = translations[currentLang].typewriter_text;
     if(i<text.length){
       document.getElementById("typewriter").textContent+=text.charAt(i);
       i++;
@@ -253,11 +359,11 @@
   
   const termBody = document.getElementById('termBody');
   const commands = {
-    help: () => ['help – voir commandes','about – info brève','projects – voir mes projets','contact – liens de contact','clear – nettoyer écran','fsociety – mode secret'],
-    about: () => ['Je suis Ex0, apprenti cybersécurité, basé en Belgique.'],
-    projects: () => ['- Project Shadow Mint','- YouTube Downloader','- Plus à venir'],
-    contact: () => ['GitHub: https://github.com/Eex00','guns.lol: https://guns.lol/4am','Discord: https://discord.com/users/552935813978259477'],
-    fsociety: () => {document.body.setAttribute('data-theme','fsociety'); return ["fsociety mode activé.","Welcome to the revolution."];},
+    help: () => translations[currentLang].help_command,
+    about: () => translations[currentLang].about_command,
+    projects: () => translations[currentLang].projects_command,
+    contact: () => translations[currentLang].contact_command,
+    fsociety: () => {document.body.setAttribute('data-theme','fsociety'); return translations[currentLang].fsociety_command;},
     clear: () => {clearTerminal();return[];}
   };
 
@@ -316,7 +422,7 @@ projectCards.forEach(card => {
       window.open('https://github.com/Eex00/Project-shadow-mint', '_blank');
     } else if(title.includes('YouTube Downloader')){
       window.open('https://github.com/Eex00/youtube-downloader', '_blank');
-    } else if(title.includes('Plus à venir')){
+    } else if(title.includes('Plus à venir') || title.includes('More to come')){
       window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     }
   });
